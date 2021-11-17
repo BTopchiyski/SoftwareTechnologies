@@ -8,6 +8,7 @@ public class BiydApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BiydApplication.class, args);
+
 	}
 
 }
