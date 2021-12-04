@@ -21,16 +21,15 @@ public class Illnesses {
     @JoinTable(name="illness_symptoms",
             joinColumns = @JoinColumn(name="illness_id"),
             inverseJoinColumns = @JoinColumn(name="symptoms_id"))
-    private Set<Symptoms> symptoms=new HashSet<Symptoms>();
+    private Set<Symptoms> symptoms = new HashSet<>();
 
     public Illnesses() {
     }
 
-    public Illnesses(Long id, String name, String description, Set<Symptoms> symptoms) {
+    public Illnesses(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.symptoms = symptoms;
     }
 
     public String getName() {

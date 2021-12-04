@@ -19,7 +19,7 @@ public class Symptoms {
     @Column(name="body_part_id")
     private String body_part;
 
-    @ManyToMany(mappedBy="symptom")
+    @ManyToMany(mappedBy = "symptoms")
     @JsonIgnore
     Set<Illnesses> illnesses=new HashSet<Illnesses>();
 
