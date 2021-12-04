@@ -1,4 +1,4 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="symptom")
-public class Symptom {
+public class Symptoms {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -19,11 +19,18 @@ public class Symptom {
     @Column(name="body_part_id")
     private String body_part;
 
-    @ManyToMany(mappedBy ="symptoms")
+    @ManyToMany(mappedBy="symptom")
     @JsonIgnore
-    Set<Illness> illnesses=new HashSet<Illness>();
+    Set<Illnesses> illnesses=new HashSet<Illnesses>();
 
-    public Symptom() {
+    public Symptoms() {
+    }
+
+    public Symptoms(Long id, String name, String body_part, Set<Illnesses> illnesses) {
+        this.id = id;
+        this.name = name;
+        this.body_part = body_part;
+        this.illnesses = illnesses;
     }
 
     public String getName() {
@@ -42,11 +49,11 @@ public class Symptom {
         this.body_part = body_part;
     }
 
-    public Set<Illness> getIllnesses() {
+    public Set<Illnesses> getIllnesses() {
         return illnesses;
     }
 
-    public void setIllnesses(Set<Illness> illnesses) {
+    public void setIllnesses(Set<Illnesses> illnesses) {
         this.illnesses = illnesses;
     }
 }
