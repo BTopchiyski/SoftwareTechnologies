@@ -17,7 +17,7 @@ public class Symptoms {
     private String name;
 
     @Column(name="body_part_id")
-    private String body_part;
+    private Integer body_part;
 
     @ManyToMany(mappedBy = "symptoms")
     @JsonIgnore
@@ -26,7 +26,7 @@ public class Symptoms {
     public Symptoms() {
     }
 
-    public Symptoms(Long id, String name, String body_part, Set<Illnesses> illnesses) {
+    public Symptoms(Long id, String name, Integer body_part, Set<Illnesses> illnesses) {
         this.id = id;
         this.name = name;
         this.body_part = body_part;
@@ -41,11 +41,11 @@ public class Symptoms {
         this.name = name;
     }
 
-    public String getBody_part() {
+    public Integer getBody_part() {
         return body_part;
     }
 
-    public void setBody_part(String body_part) {
+    public void setBody_part(Integer body_part) {
         this.body_part = body_part;
     }
 
