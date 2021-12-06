@@ -1,0 +1,23 @@
+<h2>Diseases</h2>
+<ul class="disease">
+  <li *ngFor="let disease of disease"
+      [class.selected]="disease === selectedDisease"
+      (click)="onSelect(disease)">
+    <span class="badge">{{disease.id}}</span> {{disease.name}}
+  </li>
+</ul>
+
+<!--
+<app-disease-detail [disease]="selectedDisease"></app-disease-detail>
+-->
+
+<div *ngIf="selectedDisease">
+
+  <h2>{{selectedDisease.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedDisease.id}}</div>
+  <div>
+    <label for="disease-name">Disease name: </label>
+    <input id="disease-name" [(ngModel)]="selectedDisease.name" placeholder="name">
+  </div>
+
+</div>
