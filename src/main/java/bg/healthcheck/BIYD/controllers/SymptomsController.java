@@ -32,13 +32,12 @@ public class SymptomsController {
 
     @GetMapping("/getsymptoms")
     public List<Illnesses> getAllSymptomIds(@RequestParam List<String> symptom_names) {
-        //get symptoms from symtpom names list
-        //call illnessService method to return all illnesses that contain given
-        //symptoms. Sort by most symptoms occurances
-        List<Symptoms> symptomsList = new ArrayList<>();
+        List<Integer> symptomsList = new ArrayList<>();
         for(int i = 0; i < symptom_names.size(); i++){
-            if(symptomsRepository.findAllByName(symptom_names.get(i)) != null){
-                symptomsList.add(symptomsRepository.findAllByName(symptom_names.get(i)));
+            Symptoms currentSymptom = symptomsRepository.findAllByName(symptom_names.get(i));
+            if(currentSymptom != null){
+                Integer currentId = Integer.parseInt(currentSymptom.getId().toString());
+                symptomsList.add(currentId);
             }
         }
         return illnessService.findAllIllnessesBySymptomIds(symptomsList);
