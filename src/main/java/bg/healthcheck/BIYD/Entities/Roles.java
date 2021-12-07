@@ -1,10 +1,10 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="role")
-public class Role {
+public class Roles {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -12,7 +12,12 @@ public class Role {
     @Column(name="name")
     private String name;
 
-    public Role() {
+    public Roles() {
+    }
+
+    public Roles(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {

@@ -1,10 +1,10 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="body_part")
-public class BodyPart {
+public class BodyParts {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -12,7 +12,12 @@ public class BodyPart {
     @Column(name="name")
     private String name;
 
-    public BodyPart() {
+    public BodyParts() {
+    }
+
+    public BodyParts(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {

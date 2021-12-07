@@ -1,4 +1,4 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="illness")
-public class Illness {
+public class Illnesses {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +21,15 @@ public class Illness {
     @JoinTable(name="illness_symptoms",
             joinColumns = @JoinColumn(name="illness_id"),
             inverseJoinColumns = @JoinColumn(name="symptoms_id"))
-    private Set<Symptom> symptoms=new HashSet<Symptom>();
+    private Set<Symptoms> symptoms = new HashSet<>();
 
-    public Illness() {
+    public Illnesses() {
+    }
+
+    public Illnesses(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
     public String getName() {
@@ -42,11 +48,11 @@ public class Illness {
         this.description = description;
     }
 
-    public Set<Symptom> getSymptoms() {
+    public Set<Symptoms> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(Set<Symptom> symptoms) {
+    public void setSymptoms(Set<Symptoms> symptoms) {
         this.symptoms = symptoms;
     }
 }

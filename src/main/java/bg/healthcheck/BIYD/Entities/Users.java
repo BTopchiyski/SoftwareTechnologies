@@ -1,10 +1,10 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="user")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +17,16 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Role role;
+    private Roles role;
 
-    public User() {
+    public Users() {
+    }
+
+    public Users(Long id, String username, String email, Roles role) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -38,11 +45,11 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
+    public Roles getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 }
