@@ -19,18 +19,18 @@ public class IllnessService {
         this.illnessesRepository = illnessesRepository;
     }
 
-    public List<Illnesses> findAllIllnessesBySymptomIds(List<Symptoms> symptomIds) {
+    public List<Illnesses> findAllIllnessesBySymptomIds(List<Integer> symptomIds) {
         List<Illnesses> illnessesList = new ArrayList<>();
 
         //get all illnesses that contain given symptom ids
         for(int i = 0; i < symptomIds.size(); i++ ){
-            Symptoms currentSymptomId = symptomIds.get(i);
+            Long currentSymptomId = Long.parseLong(symptomIds.get(i).toString());
             List<Illnesses> currentIllnesses = illnessesRepository.findIllnessesBySimptomId(currentSymptomId);
             if(!currentIllnesses.isEmpty()){
                 illnessesList.addAll(currentIllnesses);
             }
         }
-        //Remove dublicated illnesses and increase their probability
+        //Remove duplicated illnesses and increase their probability
         return illnessesList;
     }
 }

@@ -33,6 +33,10 @@ public class Symptoms {
         this.illnesses = illnesses;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
