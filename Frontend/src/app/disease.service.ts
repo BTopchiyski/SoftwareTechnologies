@@ -9,7 +9,7 @@ export class DiseaseService {
 
   constructor() { }
 
-  getHeroes(): Disease[] {
+  getDisease(): Disease[] {
     return DISEASES;
   }
 }
