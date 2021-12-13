@@ -1,0 +1,52 @@
+#bodyImage {
+  float: left;
+  height: 550px;
+  width: 450px;
+}
+.container {
+  padding-top: 5em;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+
+}
+/deep/ .mat-checkbox-frame {
+  border-color: grey
+}
+.form{
+  float: right;
+}
+.demo-table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.tableOfSymptoms {
+  padding-right: 10em;
+  /*padding-top: 3em;*/
+  width: 30%;
+}
+.mat-header-cell{
+  color: black;
+}
+.mat-cell{
+  color: black;
+}
+.mat-table{
+  background-color: white
+;
+}
