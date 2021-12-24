@@ -16,7 +16,9 @@ import { MarkerComponent } from './marker/marker.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+import { DiseaseSearchComponent } from './disease-search/disease-search.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     HumanBodyComponent,
     MarkerComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    DiseaseSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatTableModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+
+// The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+// and returns simulated server responses.
+// Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

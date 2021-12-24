@@ -1,8 +1,20 @@
 <h2>Disease list</h2>
+<div>
+  <label for="new-disease">Disease name: </label>
+  <input id="new-disease" #diseaseName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="add-button" (click)="add(diseaseName.value); diseaseName.value=''">
+    Add hero
+  </button>
+</div>
 <ul class="disease">
   <li *ngFor="let disease of diseases">
     <a routerLink="/detail/{{disease.id}}">
       <span class="badge">{{disease.id}}</span> {{disease.name}}
     </a>
+    <button class="delete" title="delete disease"
+            (click)="delete(disease)">x</button>
   </li>
 </ul>
+
