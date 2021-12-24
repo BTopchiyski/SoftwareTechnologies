@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Disease } from '../disease';
 import { DiseaseService } from '../disease.service';
 
 @Component({
-  selector: 'app-disease',
-  templateUrl: './disease.component.html',
-  styleUrls: ['./disease.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: [ './dashboard.component.css' ]
 })
-export class DiseaseComponent implements OnInit {
-
-  diseases: Disease[] = [];
+export class DashboardComponent implements OnInit {
+  disease: Disease[] = [];
 
   constructor(private diseaseService: DiseaseService) { }
 
@@ -20,6 +18,6 @@ export class DiseaseComponent implements OnInit {
 
   getDiseases(): void {
     this.diseaseService.getDiseases()
-      .subscribe((diseases: Disease[]) => this.diseases = diseases);
+      .subscribe((disease: Disease[]) => this.disease = disease.slice(1, 5));
   }
 }

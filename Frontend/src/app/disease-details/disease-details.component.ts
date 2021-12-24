@@ -1,5 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Disease} from '../disease'
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { Disease } from '../disease';
+import { DiseaseService } from '../disease.service';
 @Component({
   selector: 'app-disease-details',
   templateUrl: './disease-details.component.html',
@@ -7,11 +11,25 @@ import {Disease} from '../disease'
 })
 export class DiseaseDetailsComponent implements OnInit {
 
-  constructor() { }
+  disease: Disease | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private diseaseService: DiseaseService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
+    this.getDisease();
   }
 
-  @Input() disease?: Disease;
+  getDisease(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.diseaseService.getDisease(id)
+      .subscribe(disease => this.disease = disease);
+  }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

@@ -13,6 +13,10 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MarkerComponent } from './marker/marker.component';
+import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { MarkerComponent } from './marker/marker.component';
     DiseaseComponent,
     DiseaseDetailsComponent,
     HumanBodyComponent,
-    MarkerComponent
+    MarkerComponent,
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,8 @@ import { MarkerComponent } from './marker/marker.component';
     MatToolbarModule,
     MatListModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
