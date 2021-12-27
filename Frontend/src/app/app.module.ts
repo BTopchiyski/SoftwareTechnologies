@@ -13,12 +13,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MarkerComponent } from './marker/marker.component';
+import {MatButtonModule} from '@angular/material/button';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { DiseaseSearchComponent } from './disease-search/disease-search.component';
+
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DiseaseSearchComponent } from './disease-search/disease-search.componen
     DiseaseSearchComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -41,13 +43,12 @@ import { DiseaseSearchComponent } from './disease-search/disease-search.componen
     MatTableModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatButtonModule
 
 // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.
 // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+
   ],
   providers: [],
   bootstrap: [AppComponent]

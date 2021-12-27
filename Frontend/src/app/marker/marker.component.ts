@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-marker',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./marker.component.css']
 })
 export class MarkerComponent implements OnInit {
-
+  color:string = 'red';
   constructor() { }
 
   ngOnInit(): void {

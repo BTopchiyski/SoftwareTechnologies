@@ -1,39 +1,29 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {MarkerComponent} from "../marker/marker.component";
+import {DataService} from "../data.service";
+import {Symptom} from "../models/Symptom";
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  bodyPart:string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'cough', bodyPart: 'Throat'},
-  {position: 2, name: 'food comes back up',  bodyPart: 'Throat'},
-  {position: 3, name: 'high pitched breathing',  bodyPart: 'Throat'},
-  {position: 4, name: 'burping',  bodyPart: 'Stomach'},
-  {position: 5, name: 'upper belly bloating',  bodyPart: 'Stomach'},
-  {position: 6, name: 'upper stomach pain',  bodyPart: 'Stomach'},
-  {position: 7, name: 'lump in shoulder',  bodyPart: 'Shoulder'},
-  {position: 8, name: 'shoulder muscle twitching', bodyPart: 'Shoulder'},
-  {position: 9, name: 'fever',  bodyPart: 'Head'},
-  {position: 10, name: 'forehead is tender', bodyPart: 'Head'},
-];
 @Component({
   selector: 'app-human-body',
   templateUrl: './human-body.component.html',
   styleUrls: ['./human-body.component.css']
 })
 export class HumanBodyComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select','position', 'name', 'bodyPart'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  clickedRows = new Set<PeriodicElement>();
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  displayedColumns: string[] = ['select','position', 'name'];
+  dataSource = new MatTableDataSource<Symptom>();
+  // dataSource = new MatTableDataSource<PeriodicElement>(this.symptoms);
+  clickedRows = new Set<Symptom>();
+  selection = new SelectionModel<Symptom>(true, []);
+  dotColor:string = 'red';
+  symptoms: Symptom[] = [];
+  selectedBodyPartId:number = -1;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  constructor(private renderer: Renderer2,
+              private dataService: DataService) {
+  }
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
   }
@@ -45,9 +35,46 @@ export class HumanBodyComponent implements AfterViewInit {
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
+  masterToggle() {debugger;
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  /**
+   * Change selected dot color
+   * @param event
+   */
+  changeDotColor(event: any) {
+    alert(event.target.id.toString());
+    let element = document.getElementById(event.currentTarget.attributes.id.nodeValue);
+    this.dotColor=this.dotColor=='red'?'yellow':'red';
+    if(element!=null){
+      const child = element.children[0];
+      this.renderer.setStyle(child, 'background-color', this.dotColor);
+    }
+    let selectedBodyPart =event.currentTarget.className.toString();
+      if (this.dotColor=="yellow"){
+        this.dataService.getSymptomsByBodyPart(selectedBodyPart).subscribe(
+          data => {
+            debugger;
+            this.symptoms.length == 0?this.symptoms=data:this.symptoms.concat(data);
+            // let currentBodyPartId = data[0].body_part;
+            // console.log(data[0].body_part);
+            // if(currentBodyPartId == this.selectedBodyPartId ){
+              this.dataSource.data = this.symptoms;
+            // }
+          })
+      this.selectedBodyPartId} else {
+        const namesToDeleteSet = new Set(this.symptoms);
+        this.symptoms = this.symptoms.filter((bodyPart) => {
+          return !namesToDeleteSet.has(selectedBodyPart);
+        });
+        this.selectedBodyPartId = -1;
+      }
+
+  }
+  generateIllness(){debugger;
+    console.log(this.clickedRows);
   }
 }

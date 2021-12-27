@@ -1,7 +1,14 @@
- .dot{
-   height: 15px;
-   width: 15px;
-   borderRadius: 5px;
-   backgroundColor: red;
-   position: absolute;
- }
+circle:hover  {
+  fill: green !important;
+}
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot:hover  {
+  background-color: green;
+}
