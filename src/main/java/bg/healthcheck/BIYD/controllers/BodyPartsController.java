@@ -20,7 +20,7 @@ public class BodyPartsController {
     }
 
     @GetMapping("/part")
-    public List<BodyParts> getAllSymptoms(@RequestParam String bodyPart) {
+    public BodyParts getAllSymptoms(@RequestParam String bodyPart) {
         return bodyPartsRepository.getIdByBodyPartName(bodyPart);
     }
 

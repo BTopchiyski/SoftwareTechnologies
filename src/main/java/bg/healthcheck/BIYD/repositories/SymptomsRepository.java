@@ -11,7 +11,7 @@ import java.util.List;
 public interface SymptomsRepository extends JpaRepository<Symptoms,Long> {
 
     @Query("SELECT s FROM Symptoms s WHERE s.body_part = :bodyPartId")
-    List<Symptoms> findAllSymptomsByBodyPartID(Integer bodyPartId);
+    List<Symptoms> findAllSymptomsByBodyPartID(Long bodyPartId);
 
     @Query("SELECT s FROM Symptoms s WHERE s.name = :symptom_name")
     Symptoms findAllByName(String symptom_name);

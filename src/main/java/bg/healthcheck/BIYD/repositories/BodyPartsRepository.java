@@ -11,5 +11,5 @@ import java.util.List;
 public interface BodyPartsRepository extends JpaRepository<BodyParts,Long> {
 
     @Query("SELECT bp FROM BodyParts bp WHERE bp.name = :bodyPart")
-    List<BodyParts> getIdByBodyPartName(String bodyPart);
+    BodyParts getIdByBodyPartName(String bodyPart);
 }

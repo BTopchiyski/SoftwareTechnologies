@@ -1,8 +1,10 @@
 package bg.healthcheck.BIYD.controllers;
 
 import bg.healthcheck.BIYD.Services.IllnessService;
+import bg.healthcheck.BIYD.entities.BodyParts;
 import bg.healthcheck.BIYD.entities.Illnesses;
 import bg.healthcheck.BIYD.entities.Symptoms;
+import bg.healthcheck.BIYD.repositories.BodyPartsRepository;
 import bg.healthcheck.BIYD.repositories.SymptomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,16 +20,20 @@ public class SymptomsController {
 
     @Autowired
     private SymptomsRepository symptomsRepository;
+    private BodyPartsRepository bodyPartsRepository;
     private IllnessService illnessService;
 
-    public SymptomsController(SymptomsRepository symptomsRepository, IllnessService illnessService) {
+    public SymptomsController(SymptomsRepository symptomsRepository, IllnessService illnessService, BodyPartsRepository bodyPartsRepository) {
         this.symptomsRepository = symptomsRepository;
+        this.bodyPartsRepository = bodyPartsRepository;
         this.illnessService = illnessService;
     }
 
     @GetMapping("/bodypart")
-    public List<Symptoms> getAllSymptoms(@RequestParam Integer bodyPart_id) {
-        return symptomsRepository.findAllSymptomsByBodyPartID(bodyPart_id);
+    public List<Symptoms> getAllSymptoms(@RequestParam String bodyPartName) {
+        BodyParts bodyPart = bodyPartsRepository.getIdByBodyPartName(bodyPartName);
+        Long bodyPartId = Long.valueOf(bodyPart.getId());
+        return symptomsRepository.findAllSymptomsByBodyPartID(bodyPartId);
     }
 
     @GetMapping("/getsymptoms")
