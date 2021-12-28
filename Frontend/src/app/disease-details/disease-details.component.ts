@@ -17,8 +17,7 @@ export class DiseaseDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private diseaseService: DiseaseService,
     private location: Location
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getDisease();
@@ -32,12 +31,5 @@ export class DiseaseDetailsComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
-  }
-
-  save(): void {
-    if (this.disease) {
-      this.diseaseService.updateDisease(this.disease)
-        .subscribe(() => this.goBack());
-    }
   }
 }
