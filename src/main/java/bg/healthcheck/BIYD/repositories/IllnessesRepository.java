@@ -12,5 +12,5 @@ import java.util.List;
 public interface IllnessesRepository extends JpaRepository<Illnesses,Long> {
 
     @Query("SELECT i FROM Illnesses i join i.symptoms s WHERE s.id = :symptomId")
-    List<Illnesses> findIllnessesBySimptomId(Long symptomId);
+    List<Illnesses> findIllnessesBySymptomId(Long symptomId);
 }

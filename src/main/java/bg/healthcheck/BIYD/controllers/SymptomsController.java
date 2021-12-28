@@ -21,10 +21,7 @@ public class SymptomsController {
 
     @Autowired
     private SymptomsRepository symptomsRepository;
-
     private BodyPartsRepository bodyPartsRepository;
-
-    @Autowired
     private IllnessService illnessService;
 
 
@@ -45,7 +42,8 @@ public class SymptomsController {
     public List<Illnesses> getAllSymptomIds(@RequestParam List<String> symptom_names) {
         List<Integer> symptomsList = new ArrayList<>();
         for (int i = 0; i < symptom_names.size(); i++) {
-            Symptoms currentSymptom = symptomsRepository.findAllByName(symptom_names.get(i));
+            String symptomName = symptom_names.get(i);
+            Symptoms currentSymptom = symptomsRepository.findAllByName(symptomName);
             if (currentSymptom != null) {
                 Integer currentId = Integer.parseInt(currentSymptom.getId().toString());
                 symptomsList.add(currentId);
