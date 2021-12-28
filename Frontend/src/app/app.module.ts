@@ -16,7 +16,6 @@ import { MarkerComponent } from './marker/marker.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DiseaseSearchComponent } from './disease-search/disease-search.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -30,7 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
     MarkerComponent,
     MessagesComponent,
     DashboardComponent,
-    DiseaseSearchComponent
   ],
   imports: [
     HttpClientModule,
