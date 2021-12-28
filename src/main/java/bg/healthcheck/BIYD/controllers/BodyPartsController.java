@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/app/bodyparts/")
+@RequestMapping("/app/bodyparts")
 public class BodyPartsController {
 
     @Autowired
@@ -24,4 +24,8 @@ public class BodyPartsController {
         return bodyPartsRepository.getIdByBodyPartName(bodyPart);
     }
 
+    @GetMapping("/partId")
+    public Long getBodyPartId(@RequestParam String bodyPart) {
+        return bodyPartsRepository.getIdByBodyPartName(bodyPart).getId();
+    }
 }

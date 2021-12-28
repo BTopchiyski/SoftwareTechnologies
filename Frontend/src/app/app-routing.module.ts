@@ -12,6 +12,7 @@ const routes: Routes = [];
     RouterModule.forRoot([
       {path: 'home', component: HumanBodyComponent},
       {path: 'illness', component: DiseaseComponent},
+      { path: '',   redirectTo: '/home', pathMatch: 'full' },
     ]),
   ],
   exports: [RouterModule]

@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-marker',
@@ -8,6 +8,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 export class MarkerComponent implements OnInit {
   color:string = 'red';
   constructor() { }
+  isClicked: boolean=false;
 
   ngOnInit(): void {
   }

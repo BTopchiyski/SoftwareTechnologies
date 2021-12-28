@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Disease } from '../disease';
 import { DiseaseService } from '../disease.service';
+import {Illness} from "../models/Illness";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-disease',
@@ -11,8 +13,21 @@ import { DiseaseService } from '../disease.service';
 export class DiseaseComponent implements OnInit {
 
   diseases: Disease[] = [];
+  illnesses:Illness[] = [];
+  routeState: any;
+  constructor(private diseaseService: DiseaseService,
+              private router: Router) {debugger;
+      // @ts-ignore
+      if (this.router.getCurrentNavigation().extras.state) {
+          // @ts-ignore
+        this.routeState = this.router.getCurrentNavigation().extras.state;
+          if (this.routeState) {
+            this.illnesses = this.routeState.illnesses;
+        }
+      }
 
-  constructor(private diseaseService: DiseaseService) { }
+    }
+
 
   ngOnInit(): void {
     this.getDiseases();
