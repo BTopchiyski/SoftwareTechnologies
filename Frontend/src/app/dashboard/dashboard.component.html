@@ -1,8 +1,7 @@
 <h2>Top Diseases</h2>
 <div class="disease-menu">
   <a *ngFor="let diseases of disease"
-     routerLink="/detail/{{diseases.id}}">
-    {{diseases.name}}
+     routerLink="/detail/{{diseases.diseaseID}}">
+    {{diseases.diseaseName}}
   </a>
 </div>
-<app-disease-search></app-disease-search>

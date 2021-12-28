@@ -33,4 +33,9 @@ public class IllnessService {
         //Remove duplicated illnesses and increase their probability
         return illnessesList;
     }
+
+    public List<Illnesses> getIllnesses() {
+        return illnessesRepository.findAll();
+    }
+
 }

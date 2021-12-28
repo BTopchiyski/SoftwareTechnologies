@@ -1,11 +1,11 @@
 <div *ngIf="disease">
 
-  <h2>{{disease.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{disease.id}}</div>
+  <h2>{{disease.diseaseName | uppercase}} Details</h2>
+  <div><span>id: </span>{{disease.diseaseID}}</div>
   <div>
     <label for="disease-name">Disease name: </label>
-    <input id="disease-name" [(ngModel)]="disease.name" placeholder="name">
+    <input id="disease-name" [(ngModel)]="disease.diseaseName" placeholder="name">
   </div>
   <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+
 </div>
