@@ -25,17 +25,26 @@ public class IllnessService {
         //get all illnesses that contain given symptom ids
         for(int i = 0; i < symptomIds.size(); i++ ){
             Long currentSymptomId = Long.parseLong(symptomIds.get(i).toString());
-            List<Illnesses> currentIllnesses = illnessesRepository.findIllnessesBySimptomId(currentSymptomId);
+            List<Illnesses> currentIllnesses = illnessesRepository.findIllnessesBySymptomId(currentSymptomId);
             if(!currentIllnesses.isEmpty()){
                 illnessesList.addAll(currentIllnesses);
             }
         }
-        //Remove duplicated illnesses and increase their probability
-        return illnessesList;
+        return removeDuplicateIllnesses(illnessesList);
     }
 
     public List<Illnesses> getIllnesses() {
         return illnessesRepository.findAll();
+    }
+
+    public List<Illnesses> removeDuplicateIllnesses(List<Illnesses> currentIllnesses) {
+        List<Illnesses> refactoredIllnessesList = new ArrayList<Illnesses>();
+        for(Illnesses illnesses : currentIllnesses) {
+            if(!refactoredIllnessesList.contains(illnesses)){
+                refactoredIllnessesList.add(illnesses);
+            }
+        }
+        return refactoredIllnessesList;
     }
 
 }
