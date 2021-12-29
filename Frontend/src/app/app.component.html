@@ -1,6 +1,8 @@
-<mat-toolbar>
-  <span style="font-size: 25px">SMART </span>
-  <span style="font-size: 25px">Health</span>
-</mat-toolbar>
+<div *ngIf="isUserLogged">
+  <mat-toolbar>
+    <span style="font-size: 25px">SMART </span>
+    <span style="font-size: 25px">Health</span>
+  </mat-toolbar>
+</div>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

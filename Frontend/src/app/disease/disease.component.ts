@@ -21,7 +21,7 @@ export class DiseaseComponent implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
           // @ts-ignore
         this.routeState = this.router.getCurrentNavigation().extras.state;
-          if (this.routeState) {
+          if (this.routeState) {debugger;
             this.illnesses = this.routeState.illnesses;
         }
       }
@@ -30,16 +30,8 @@ export class DiseaseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getDiseases();
+
   }
 
-  getDiseases(): void {
-    this.diseaseService.getDiseases()
-      .subscribe((diseases: Disease[]) => this.diseases = diseases);
-  }
 
-  onChangePage(diseases: Array<any>) {
-    // update current page of items
-    this.diseases = diseases;
-  }
 }

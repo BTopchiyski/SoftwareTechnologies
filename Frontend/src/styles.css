@@ -6,9 +6,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 4em;
 }
 .mat-toolbar {
-  background-color:#4DD8DD;
+  background-color:#005A70;
   margin-bottom: 2em;
 }
+.mainForm {    
+  width: 40%;
+  top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;   
+  background-color: white; 
+}
+.mainForm h2 {
+  color: black;
+}
+.mainForm label {
+  color: black;
+}
 
+.photoContainer{
+  background-image: url('assets/images/background.jpg');
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  top: 0px;    
+  left: 0px;
+  z-index: 0;
+  
+}
 
 

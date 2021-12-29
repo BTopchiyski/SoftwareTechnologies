@@ -5,13 +5,15 @@ import {DataService} from "../data.service";
 import {Symptom} from "../models/Symptom";
 import {Illness} from "../models/Illness";
 import {ActivatedRoute, Router} from "@angular/router";
+import { TooltipPosition } from '@angular/material/tooltip';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-human-body',
   templateUrl: './human-body.component.html',
   styleUrls: ['./human-body.component.css']
 })
-export class HumanBodyComponent implements AfterViewInit {
+export class HumanBodyComponent {
   displayedColumns: string[] = ['select', 'name'];
   displayedColumnsSelectedSymptoms: string[] = ['name'];
   dataSource = new MatTableDataSource<Symptom>();
@@ -19,11 +21,11 @@ export class HumanBodyComponent implements AfterViewInit {
   clickedRows = new Set<Symptom>();
   selection = new SelectionModel<Symptom>(true, []);
   symptoms: Symptom[] = [];
-  selectedBodyPartId:number = -1;
   selectedSymptoms: Symptom[] = [];
   selectedDotsHash = new Map<string, boolean>();
   illnesses:Illness[] = [];
-  generateButtonIsClicked=false;
+  public positionOptions: TooltipPosition[] = ['left'];
+  public position = new FormControl(this.positionOptions[0]); 
 
   constructor(private renderer: Renderer2,
               private dataService: DataService,
@@ -31,18 +33,18 @@ export class HumanBodyComponent implements AfterViewInit {
               private router: Router) {
   }
 
-
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-  }
-  /** Whether the number of selected elements matches the total number of rows. */
+  /**
+   * Method that checks whether the number of selected elements matches the total number of rows
+   */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  /**
+   * Method that selects all rows if they are not all selected; otherwise clear selection.
+   */
   masterToggle() {
     if(this.isAllSelected()){
     this.selection.clear()
@@ -55,17 +57,26 @@ export class HumanBodyComponent implements AfterViewInit {
     }
   }
 
+  /**
+   * Method that adds selected symptom to selected symptoms table,
+   * every time when row is selected, and removes unselected sumptom - when row is unselected
+   * @param row - selected row
+   */
   toggleCheckbox(row:any) {
     this.selection.toggle(row);
     if(this.selectedSymptoms.some(x=>x.name == row.name)){
      this.selectedSymptoms = this.selectedSymptoms.filter(x=>x.name!=row.name);
     }else {
       this.selectedSymptoms.push(row);
-    }console.log(row);
+    }
     this.dataSourceSelectedSymptoms.data = this.selectedSymptoms;
     row.selected = !row.selected;
   }
 
+  /**
+   * Method that uses the data parameter to create an array of objects of type Symptom
+   * @param data
+   */
   populateSymptoms(data:any):Symptom[]{
     let symptoms:Symptom[] = [];
     for (let i = 0; i < data.length; i++) {
@@ -76,12 +87,21 @@ export class HumanBodyComponent implements AfterViewInit {
     return symptoms;
   }
 
+  /**
+   * Method that uses the data parameter to create an array of objects of type Illness
+   * @param data
+   */
   populateIllnesses(data:any){
     for (let i = 0; i < data.length; i++){
       let currIllness = new Illness(data[i].name, data[i].description,data[i].symptoms);
       this.illnesses.push(currIllness);
     }
   }
+
+  /**
+   * Method that checks if current dot is already selected
+   * @param dotId - id of current dot
+   */
   checkIfDotIsSelected(dotId:string): boolean {
    let isSelected = this.selectedDotsHash.get(dotId);
    if(isSelected!=undefined){
@@ -95,10 +115,10 @@ export class HumanBodyComponent implements AfterViewInit {
 
 
   /**
-   * Change selected dot color
+   * Method that changes dot color and fill table with Symptoms
    * @param event
    */
-  changeDotColor(event: any) {
+  changeDotColor(event: any) {debugger;
     let element = document.getElementById(event.currentTarget.attributes.id.nodeValue);
     let isDotAlreadySelected:boolean = this.checkIfDotIsSelected(event.currentTarget.attributes.id.nodeValue);
     let dotColor:string=isDotAlreadySelected==true?'red':'yellow';
@@ -110,7 +130,7 @@ export class HumanBodyComponent implements AfterViewInit {
     if (!isDotAlreadySelected){
       this.dataService.getSymptomsByBodyPart(selectedBodyPart).subscribe(
         data => {
-
+          debugger;
           if(this.symptoms.length == 0){
             this.symptoms=this.populateSymptoms(data);
           } else {
@@ -121,14 +141,15 @@ export class HumanBodyComponent implements AfterViewInit {
           }
           this.dataSource.data = this.symptoms;
         })
-      this.selectedBodyPartId
       }
     else {
       let selectedBodyPartId:number;
-        this.dataService.getBodyPartIdByName(event.currentTarget.className.toString()).subscribe(id => {
+        this.dataService.getBodyPartIdByName(event.currentTarget.className.toString()).subscribe(id => {debugger;
           selectedBodyPartId =  parseInt(id.toString());
 
           this.symptoms =  this.symptoms.filter(x=>x.bodyPartId!=selectedBodyPartId);
+          this.selectedSymptoms =  this.selectedSymptoms.filter(x=>x.bodyPartId!=selectedBodyPartId);
+          this.dataSourceSelectedSymptoms.data = this.selectedSymptoms;
           this.dataSource.data = this.symptoms;
         })
     }
