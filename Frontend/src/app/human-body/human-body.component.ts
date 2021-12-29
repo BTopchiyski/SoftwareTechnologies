@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./human-body.component.css']
 })
 export class HumanBodyComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select','position', 'name'];
+  displayedColumns: string[] = ['select', 'name'];
   displayedColumnsSelectedSymptoms: string[] = ['name'];
   dataSource = new MatTableDataSource<Symptom>();
   dataSourceSelectedSymptoms = new MatTableDataSource<Symptom>();
