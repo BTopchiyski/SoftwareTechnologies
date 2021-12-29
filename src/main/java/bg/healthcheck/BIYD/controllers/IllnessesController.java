@@ -1,6 +1,6 @@
 package bg.healthcheck.BIYD.controllers;
 
-import bg.healthcheck.BIYD.Services.IllnessService;
+import bg.healthcheck.BIYD.services.IllnessService;
 import bg.healthcheck.BIYD.entities.Illnesses;
 import bg.healthcheck.BIYD.repositories.IllnessesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
