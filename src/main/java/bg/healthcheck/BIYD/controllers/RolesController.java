@@ -1,9 +1,8 @@
 package bg.healthcheck.BIYD.controllers;
 
-import bg.healthcheck.BIYD.repositories.RolesRepository;
+import bg.healthcheck.BIYD.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RolesController {
 
     @Autowired
-    private RolesRepository rolesRepository;
+    private RoleRepository roleRepository;
 
-    public RolesController(RolesRepository rolesRepository) {
-        this.rolesRepository = rolesRepository;
+    public RolesController(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
 }

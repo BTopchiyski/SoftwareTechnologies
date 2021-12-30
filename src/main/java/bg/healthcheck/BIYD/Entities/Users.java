@@ -3,6 +3,8 @@ package bg.healthcheck.BIYD.entities;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Set;
+import bg.healthcheck.BIYD.entities.Roles;
+
 
 @Data
 @Entity
@@ -26,6 +28,12 @@ public class Users {
     private Set<Roles> roles;
 
     public Users() {
+    }
+
+    public Users(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public Users(long id, String name, String username, String email, String password, Set<Roles> roles) {
