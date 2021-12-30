@@ -1,14 +1,12 @@
 package bg.healthcheck.BIYD.controllers;
 
-import bg.healthcheck.BIYD.Services.IllnessService;
+import bg.healthcheck.BIYD.services.IllnessService;
 import bg.healthcheck.BIYD.entities.BodyParts;
 import bg.healthcheck.BIYD.entities.Illnesses;
-import bg.healthcheck.BIYD.entities.BodyParts;
 import bg.healthcheck.BIYD.entities.Symptoms;
 import bg.healthcheck.BIYD.repositories.BodyPartsRepository;
 import bg.healthcheck.BIYD.repositories.SymptomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

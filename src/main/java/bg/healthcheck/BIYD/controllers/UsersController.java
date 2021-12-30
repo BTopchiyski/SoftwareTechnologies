@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/app/users")
-public class UserController {
+public class UsersController {
 
     private UsersRepository usersRepository;
 
     @Autowired
-    public UserController(UsersRepository usersRepository) {
+    public UsersController(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 

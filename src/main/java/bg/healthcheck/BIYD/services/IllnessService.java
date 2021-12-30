@@ -1,7 +1,6 @@
-package bg.healthcheck.BIYD.Services;
+package bg.healthcheck.BIYD.services;
 
 import bg.healthcheck.BIYD.entities.Illnesses;
-import bg.healthcheck.BIYD.entities.Symptoms;
 import bg.healthcheck.BIYD.repositories.IllnessesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

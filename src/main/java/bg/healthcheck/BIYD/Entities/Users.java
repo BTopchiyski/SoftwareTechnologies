@@ -1,32 +1,56 @@
 package bg.healthcheck.BIYD.entities;
 
+import lombok.Data;
 import javax.persistence.*;
+import java.util.Set;
 
+@Data
 @Entity
-@Table(name="user")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Users {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name="username")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
     private String username;
-
-    @Column(name="email")
     private String email;
+    private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Roles role;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Roles> roles;
 
     public Users() {
     }
 
-    public Users(Long id, String username, String email, Roles role) {
+    public Users(long id, String name, String username, String email, String password, Set<Roles> roles) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.email = email;
-        this.role = role;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
@@ -45,11 +69,19 @@ public class Users {
         this.email = email;
     }
 
-    public Roles getRole() {
-        return role;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
     }
 }
