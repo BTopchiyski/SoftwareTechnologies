@@ -28,11 +28,6 @@ public class Users {
     public Users() {
     }
 
-    public Users(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public Users(long id, String name, String username, String email, String password, Set<Roles> roles) {
         this.id = id;
         this.name = name;
