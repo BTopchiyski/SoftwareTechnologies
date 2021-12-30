@@ -1,23 +1,42 @@
-package bg.healthcheck.BIYD.entities;
+package bg.healthcheck.BIYD.models;
 
-import lombok.Data;
+import bg.healthcheck.BIYD.entities.Roles;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"username"}),
-        @UniqueConstraint(columnNames = {"email"})
-})
-public class Users {
+@Table(	name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String name;
+    private Long id;
+
+    @NotBlank
+    @Size(max = 20)
     private String username;
+
+    @NotBlank
+    @Size(max = 20)
+    private String name;
+
+    @NotBlank
+    @Size(max = 50)
+    @Email
     private String email;
+
+    @NotBlank
+    @Size(max = 120)
     private String password;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
@@ -25,32 +44,30 @@ public class Users {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Roles> roles;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public Users(long id, String name, String username, String email, String password, Set<Roles> roles) {
-        this.id = id;
-        this.name = name;
+    public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 20) String name, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
+        this.name = name;
         this.email = email;
         this.password = password;
-        this.roles = roles;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUserName() {
+    public String getName() {
         return name;
     }
 
@@ -63,7 +80,7 @@ public class Users {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.name = name;
     }
 
     public String getEmail() {
