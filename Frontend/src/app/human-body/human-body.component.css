@@ -15,8 +15,8 @@
   height: 100%;
   overflow: scroll;
 }
-.mat-checkbox-frame {
-  border-color: grey
+/deep/.mat-checkbox-frame {
+  border-color: grey !important;
 }
 .form{
   float: right;
