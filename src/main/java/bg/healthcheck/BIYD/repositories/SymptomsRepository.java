@@ -15,4 +15,5 @@ public interface SymptomsRepository extends JpaRepository<Symptoms,Long> {
 
     @Query("SELECT s FROM Symptoms s WHERE s.name = :symptom_name")
     Symptoms findAllByName(String symptom_name);
+
 }

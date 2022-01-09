@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+
 <div class="container">
   <div style="position: fixed">
       <img
@@ -33,9 +33,20 @@
     <!--    > </span>-->
   </div>
   <div style="float: right;width: 50%;width:fit-content; margin-right: 2em">
-    <div>
-      <button mat-raised-button (click)="generateIllness()">Generate illnesses</button>
-    </div>
+    <div style="display: flex;">
+      <div>
+        <button mat-raised-button (click)="generateIllness()">Generate illnesses</button>
+      </div>
+  <div style="display: flex;" *ngIf="isAdmin">
+    <div class="ml-3">
+      <button mat-raised-button (click)="openDialog('illness')">Add illness</button>
+    </div>   
+    <div class="ml-3">
+      <button mat-raised-button (click)="openDialog('symptom')">Add Symptom</button>
+    </div>   
+  </div>
+  </div>     
+    
     <div  class="tables">
       <div class="tableOfSymptoms mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" class="demo-table">

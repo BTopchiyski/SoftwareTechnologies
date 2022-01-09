@@ -25,4 +25,12 @@ export class DataService {
     let params = new HttpParams().set("symptom_names",symptoms);
     return this.http.get(this.APP_URL + '/app/symptoms/getsymptoms', {params: params});
   }
+
+  getAllSymptoms() {
+    return this.http.get(this.APP_URL + '/app/symptoms/all');
+  }
+
+  getAllBodyParts() {
+    return this.http.get(this.APP_URL + '/app/bodyparts/all');  
+  }
 }

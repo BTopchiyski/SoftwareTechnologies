@@ -25,15 +25,16 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    console.log(this.route.snapshot.queryParams);
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';debugger;
   }
 
   ngOnInit() {
@@ -41,9 +42,9 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
+    console.log(this.route.snapshot.queryParams);
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';debugger;
   }
 
   // convenience getter for easy access to form fields
@@ -58,13 +59,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
+    this.returnUrl = '/home';
     this.loading = true;
     this.authenticationService.login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(["/home"]);
+          this.router.navigate([this.returnUrl]);
         },
         error => {
           this.alertService.error(error);
