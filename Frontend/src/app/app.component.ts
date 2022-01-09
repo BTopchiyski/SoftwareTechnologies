@@ -11,13 +11,14 @@ import { User } from './models/User';
 export class AppComponent {
   title = 'SmartHealth';
   currentUser: User | undefined;
-  isUserLogged:boolean = false;
+ 
   
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        
     }
 
     logout() {

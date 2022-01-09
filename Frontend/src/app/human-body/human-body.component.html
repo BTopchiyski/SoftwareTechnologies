@@ -1,19 +1,4 @@
-<mat-toolbar>
-  <span style="font-size: 25px">SMART </span>
-  <span style="font-size: 25px">Health</span>
 
-  <span class="logout">    
-     <button  mat-mini-fab matTooltip="John Doe" [matMenuTriggerFor]="menu" [matTooltipPosition]="position.value"  color="accent">
-      <mat-icon>perm_identity</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>power_settings_new</mat-icon>
-          <span>Logout</span>
-        </button>
-    </mat-menu>
-  </span>
-</mat-toolbar>
 <div class="container">
   <div style="position: fixed">
       <img
@@ -48,9 +33,20 @@
     <!--    > </span>-->
   </div>
   <div style="float: right;width: 50%;width:fit-content; margin-right: 2em">
-    <div>
-      <button mat-raised-button (click)="generateIllness()">Generate illnesses</button>
-    </div>
+    <div style="display: flex;">
+      <div>
+        <button mat-raised-button (click)="generateIllness()">Generate illnesses</button>
+      </div>
+  <div style="display: flex;" *ngIf="isAdmin">
+    <div class="ml-3">
+      <button mat-raised-button (click)="openDialog('illness')">Add illness</button>
+    </div>   
+    <div class="ml-3">
+      <button mat-raised-button (click)="openDialog('symptom')">Add Symptom</button>
+    </div>   
+  </div>
+  </div>     
+    
     <div  class="tables">
       <div class="tableOfSymptoms mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" class="demo-table">

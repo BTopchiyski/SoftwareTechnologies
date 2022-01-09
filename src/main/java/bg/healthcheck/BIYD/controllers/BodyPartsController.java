@@ -28,4 +28,10 @@ public class BodyPartsController {
     public Long getBodyPartId(@RequestParam String bodyPart) {
         return bodyPartsRepository.getIdByBodyPartName(bodyPart).getId();
     }
+
+    @GetMapping("/all")
+    public List<BodyParts> getAllBodyParts() {
+        return bodyPartsRepository.findAll();
+    }
+
 }

@@ -50,6 +50,8 @@ public class SymptomsController {
         return illnessService.findAllIllnessesBySymptomIds(symptomsList);
     }
 
-
-
+    @GetMapping("/all")
+    public List<Symptoms> getAllBodyParts() {
+        return symptomsRepository.findAll();
+    }
 }

@@ -12,4 +12,5 @@ public interface BodyPartsRepository extends JpaRepository<BodyParts,Long> {
 
     @Query("SELECT bp FROM BodyParts bp WHERE bp.name = :bodyPart")
     BodyParts getIdByBodyPartName(String bodyPart);
+
 }

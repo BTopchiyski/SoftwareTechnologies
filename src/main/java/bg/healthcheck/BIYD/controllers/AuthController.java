@@ -69,7 +69,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -84,7 +84,7 @@ public class AuthController {
 
         // Create new user's account
         encoder = new BCryptPasswordEncoder(16);
-       Users user = new Users(signUpRequest.getUsername(),
+       Users user = new Users(signUpRequest.getFirstName(),signUpRequest.getLastName(),signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 

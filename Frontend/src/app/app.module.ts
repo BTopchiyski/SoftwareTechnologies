@@ -26,8 +26,14 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddIllnessDialogComponent } from './add-illness-dialog/add-illness-dialog.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { AddSymptomDialogComponent } from './add-symptom-dialog/add-symptom-dialog.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +47,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RegistrationComponent,
     DoctorHumanBodyComponent,
     AlertComponent,
+    NavbarComponent,
+    AddIllnessDialogComponent,
+    AddSymptomDialogComponent,
+    MessageDialogComponent
   ],
   imports: [
+    CarouselModule.forRoot(),
     MatCardModule,
     HttpClientModule,
     BrowserModule,
@@ -58,7 +69,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
 
 // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.
