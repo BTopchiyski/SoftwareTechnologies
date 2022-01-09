@@ -49,4 +49,7 @@ public class SymptomsController {
         }
         return illnessService.findAllIllnessesBySymptomIds(symptomsList);
     }
+
+
+
 }

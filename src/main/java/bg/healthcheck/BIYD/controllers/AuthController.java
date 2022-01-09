@@ -1,6 +1,6 @@
 package bg.healthcheck.BIYD.controllers;
 
-import bg.healthcheck.BIYD.Entities.ERole;
+import bg.healthcheck.BIYD.entities.ERole;
 import bg.healthcheck.BIYD.SecurityConfig.JwtUtils;
 import bg.healthcheck.BIYD.SecurityConfig.UserDetailsImpl;
 import bg.healthcheck.BIYD.payload.JwtResponse;

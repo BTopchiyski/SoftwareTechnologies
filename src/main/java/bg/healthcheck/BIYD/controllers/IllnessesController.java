@@ -29,4 +29,9 @@ public class IllnessesController {
     public List<Illnesses> getIllnesses() {
         return illnessService.getIllnesses();
     }
+
+    @GetMapping("/getGroupedIllnes")
+    public List<Illnesses> getSymptomsGroupedByEqualsSymptomCount() {
+        return illnessService.getSymptomsGroupedByEqualsSymptomCount();
+    }
 }
