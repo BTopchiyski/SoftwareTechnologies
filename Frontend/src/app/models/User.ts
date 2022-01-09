@@ -6,6 +6,7 @@ export class User {
   token: string;
   firstName: string;
   lastName:string;
+  roles:string='';
 
   constructor( id: number,firstName: string,lastName: string, username: string,email:string, password: string, token: string) {
     this.id = id;

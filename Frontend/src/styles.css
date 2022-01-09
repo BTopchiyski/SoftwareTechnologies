@@ -51,3 +51,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   line-height: 300px;
   text-align: center;
 }
+
+.mat-dialog-content {
+  display: grid !important;
+}

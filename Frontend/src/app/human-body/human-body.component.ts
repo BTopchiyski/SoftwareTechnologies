@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import {AfterViewInit, Component,Renderer2} from '@angular/core';
+import {AfterViewInit, Component,OnInit,Renderer2} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {DataService} from "../data.service";
 import {Symptom} from "../models/Symptom";
@@ -7,13 +7,20 @@ import {Illness} from "../models/Illness";
 import {ActivatedRoute, Router} from "@angular/router";
 import { TooltipPosition } from '@angular/material/tooltip';
 import { FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../models/User';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { AddIllnessDialogComponent } from '../add-illness-dialog/add-illness-dialog.component';
+import { AddSymptomDialogComponent } from '../add-symptom-dialog/add-symptom-dialog.component';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+
 
 @Component({
   selector: 'app-human-body',
   templateUrl: './human-body.component.html',
   styleUrls: ['./human-body.component.css']
 })
-export class HumanBodyComponent {
+export class HumanBodyComponent implements OnInit {
   displayedColumns: string[] = ['select', 'name'];
   displayedColumnsSelectedSymptoms: string[] = ['name'];
   dataSource = new MatTableDataSource<Symptom>();
@@ -24,13 +31,19 @@ export class HumanBodyComponent {
   selectedSymptoms: Symptom[] = [];
   selectedDotsHash = new Map<string, boolean>();
   illnesses:Illness[] = [];
+  isAdmin:boolean=false;
+  currentUserSubject:BehaviorSubject<User> = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
 
   constructor(private renderer: Renderer2,
               private dataService: DataService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
+  ngOnInit() {
+    this.isAdmin = this.checkIfUserIsAdmin();
+  }
   /**
    * Method that checks whether the number of selected elements matches the total number of rows
    */
@@ -154,14 +167,46 @@ export class HumanBodyComponent {
 
   }
   generateIllness(){
-    let selectedSymptomsNames = this.selectedSymptoms.map(x =>  x.name);
-    this.dataService.generateIllnessListBySymptoms(selectedSymptomsNames).subscribe( data => {
-     this.populateIllnesses(data);
-      this.router.navigate(['/illness'], {
-        state: {
-          illnesses:this.illnesses
-        }
-      });
-    })
+    if(this.selectedSymptoms.length>0){
+      let selectedSymptomsNames = this.selectedSymptoms.map(x =>  x.name);
+      this.dataService.generateIllnessListBySymptoms(selectedSymptomsNames).subscribe( data => {
+       this.populateIllnesses(data);
+        this.router.navigate(['/illness'], {
+          state: {
+            illnesses:this.illnesses
+          }
+        });
+      })
+    } else {
+      const matDialogConfig = new MatDialogConfig();
+      matDialogConfig.width = "300px";
+       let dialogRef = this.dialog.open(MessageDialogComponent, matDialogConfig);
+      dialogRef.afterClosed().subscribe();
+    }
+  
+  }
+
+  checkIfUserIsAdmin():boolean {     
+    let role:string = this.currentUserSubject.getValue().roles;
+    if(role[0] =='Patient'){
+      return false;
+    }
+    return true;   
+  }
+
+  openDialog(key:string) {debugger;
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.width = "600px";
+    // matDialogConfig.height = "480px";
+    let dialogRef:any = {};
+    if(key=="illness"){
+      dialogRef = this.dialog.open(AddIllnessDialogComponent, matDialogConfig);
+    } else {
+      dialogRef = this.dialog.open(AddSymptomDialogComponent, matDialogConfig);
+    }
+   
+    // const dialogRef = this.dialog.open(AddIllnessDialogComponent);
+
+    dialogRef.afterClosed().subscribe();
   }
 }
