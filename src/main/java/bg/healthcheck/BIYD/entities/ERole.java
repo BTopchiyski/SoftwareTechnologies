@@ -1,4 +1,4 @@
-package bg.healthcheck.BIYD.Entities;
+package bg.healthcheck.BIYD.entities;
 
 public enum ERole {
     ROLE_PATIENT("Patient"),
