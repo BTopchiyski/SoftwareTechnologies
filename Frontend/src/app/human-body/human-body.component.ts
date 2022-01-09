@@ -24,8 +24,6 @@ export class HumanBodyComponent {
   selectedSymptoms: Symptom[] = [];
   selectedDotsHash = new Map<string, boolean>();
   illnesses:Illness[] = [];
-  public positionOptions: TooltipPosition[] = ['left'];
-  public position = new FormControl(this.positionOptions[0]); 
 
   constructor(private renderer: Renderer2,
               private dataService: DataService,

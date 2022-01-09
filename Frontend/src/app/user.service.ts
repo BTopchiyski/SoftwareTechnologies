@@ -6,13 +6,12 @@ import {User} from "./models/User";
   providedIn: 'root'
 })
 export class UserService {
+  API_URL = 'http://localhost:8080'
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<User[]>(`/users`);
-  }
-
-  register(user: User) {
-    return this.http.post(`/users/register`, user);
+  register(user: User) {debugger;
+    return this.http.post(this.API_URL + "/api/auth/signup", {firstName: user.firstName,lastName: user.lastName, username: user.username,
+      email: user.email,
+      password: user.password});
   }
 }

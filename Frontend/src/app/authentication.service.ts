@@ -10,7 +10,7 @@ import {User} from "./models/User";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-
+  API_URL = 'http://localhost:8080/api/auth/';
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -21,8 +21,8 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`/users/authenticate`, { username, password })
-      .pipe(map(user => {
+    return this.http.post<any>(this.API_URL+"signin", { username, password })
+      .pipe(map(user => {debugger;
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -40,4 +40,6 @@ export class AuthenticationService {
     // @ts-ignore
     this.currentUserSubject.next(null);
   }
+
+  
 }
