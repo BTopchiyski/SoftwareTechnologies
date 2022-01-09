@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { UserService } from '../user.service';
 import { AlertService } from '../alert.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-
+  errorMessage:string = '';  
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
@@ -33,7 +34,8 @@ export class RegistrationComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         username: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        email: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -42,7 +44,8 @@ export class RegistrationComponent implements OnInit {
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           username: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          email: ['', [Validators.required, Validators.minLength(6)]]
       });
   }
 
@@ -65,8 +68,12 @@ export class RegistrationComponent implements OnInit {
                   this.alertService.success('Registration successful', true);
                   this.router.navigate(['/login']);
               },
-              error => {
-                  this.alertService.error(error);
+              (error: HttpErrorResponse) => {
+                  this.errorMessage = error.error["message"];
+                  this.errorMessage = this.errorMessage.replace('Error: ','');
+
+                console.log(this.errorMessage);                 
+                  debugger;
                   this.loading = false;
               });
   }

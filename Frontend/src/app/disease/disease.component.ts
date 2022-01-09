@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { Disease } from '../disease';
 import { DiseaseService } from '../disease.service';
@@ -8,11 +8,11 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-disease',
   templateUrl: './disease.component.html',
-  styleUrls: ['./disease.component.css']
+  styleUrls: ['./disease.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DiseaseComponent implements OnInit {
-
-  diseases: Disease[] = [];
+  @ViewChild('widgetsContent', { read: ElementRef }) public widgetsContent: ElementRef<any> = new ElementRef({});
   illnesses:Illness[] = [];
   routeState: any;
   constructor(private diseaseService: DiseaseService,
@@ -30,8 +30,6 @@ export class DiseaseComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-  }
-
+}
 
 }

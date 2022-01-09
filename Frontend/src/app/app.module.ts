@@ -26,7 +26,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RegistrationComponent,
     DoctorHumanBodyComponent,
     AlertComponent,
+    NavbarComponent
   ],
   imports: [
+    CarouselModule.forRoot(),
     MatCardModule,
     HttpClientModule,
     BrowserModule,
@@ -58,7 +61,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
 
 // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
 // and returns simulated server responses.

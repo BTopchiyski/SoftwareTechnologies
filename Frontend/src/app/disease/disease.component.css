@@ -1,5 +1,5 @@
 /* DiseaseComponent's private CSS styles */
-.disease {
+/* .disease {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
@@ -49,4 +49,45 @@
 
 input {
   padding: .5rem;
+} */
+body {  
+  background-color: gainsboro !important;
+  overflow-y: scroll;
 }
+.mat-card {
+  background: white;
+  color: black;
+  margin-bottom: 2em;
+  width: 90%;
+  margin-left: 5%;  
+}
+
+.mat-card h1,h4 {
+  font-family: math !important;
+}
+
+.mat-card li, h3{
+  color:grey;
+  font-family: sans-serif;
+}
+
+mat-card-actions {
+  margin-top: 20px;
+}
+.mat-card button {
+  font-size: 12px;
+  height: 30px;
+}
+/* .info-widget {
+  width: 31.75%;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+.middle {
+  float: left;
+  width: 90%;
+  overflow: auto;
+ 
+  white-space: nowrap;
+} */
