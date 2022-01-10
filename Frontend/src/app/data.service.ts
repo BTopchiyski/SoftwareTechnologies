@@ -40,7 +40,7 @@ export class DataService {
     });
   }
 
-  saveIllness(name: string, description: string, symptoms: any) {
+  saveIllness(name: string, description: string, symptoms: any): Observable<any> {
     return this.http.post(this.APP_URL + '/app/illnesses/addIllness', {
       name, description, symptoms
     });

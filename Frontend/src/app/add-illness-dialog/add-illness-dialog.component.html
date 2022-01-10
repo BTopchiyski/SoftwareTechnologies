@@ -18,13 +18,10 @@
       <mat-form-field appearance="fill">
         <mat-label>Symptoms</mat-label>
         <div class="form-group">
-        <mat-select formControlName="symptoms" multiple>
-          <mat-select-trigger>
+        <mat-select formControlName="symptoms" multiple>         
             {{symptoms.value ? symptoms.value[0] : ''}}
-            <span *ngIf="symptoms.value?.length > 1" class="example-additional-selection">
-              (+{{symptoms.value.length - 1}} {{symptoms.value?.length === 2 ? 'other' : 'others'}})
-            </span>
-          </mat-select-trigger>
+            <span *ngIf="symptoms.value?.length > 1" class="example-additional-selection">             
+            </span>          
           <mat-option *ngFor="let symptom of symptomsList" [value]="symptom">{{symptom['name']}}</mat-option>
         </mat-select>
         </div>
