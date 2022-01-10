@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { DataService } from '../data.service';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-symptom-dialog',
@@ -9,9 +10,20 @@ import { DataService } from '../data.service';
 })
 export class AddSymptomDialogComponent implements OnInit {
   bodyPartsList = [];
-  constructor(private dataService:DataService) { }
 
-  ngOnInit(): void {
+  constructor( public dialogRef: MatDialogRef<AddSymptomDialogComponent>,
+    private dataService:DataService,
+    private formBuilder: FormBuilder) { }
+
+  addSymptom!: FormGroup;
+
+  ngOnInit() {
+      this.addSymptom = this.formBuilder.group({
+        symptomName: ['', Validators.required],
+        bodyParts: ['', Validators.required]
+      });
+
+
     this.dataService.getAllBodyParts().subscribe((res: any) => {
       this.bodyPartsList = res;
     }, error => {
@@ -21,5 +33,11 @@ export class AddSymptomDialogComponent implements OnInit {
 
   bodyParts = new FormControl();
 
-  
+
+  saveSymptom() {
+      this.dataService.saveSymptom(this.addSymptom.value.symptomName, this.addSymptom.value.bodyParts.id)
+        .subscribe((data) => {
+          console.log(data.toString());
+        });
+  }
 }

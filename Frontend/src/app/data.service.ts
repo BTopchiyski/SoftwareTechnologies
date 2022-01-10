@@ -31,6 +31,12 @@ export class DataService {
   }
 
   getAllBodyParts() {
-    return this.http.get(this.APP_URL + '/app/bodyparts/all');  
+    return this.http.get(this.APP_URL + '/app/bodyparts/all');
+  }
+
+  saveSymptom(name: string, body_part: string) {
+    return this.http.post(this.APP_URL + '/app/symptoms/addsymptom', {
+      name, body_part
+    });
   }
 }
