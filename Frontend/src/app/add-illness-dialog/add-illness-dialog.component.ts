@@ -30,8 +30,6 @@ export class AddIllnessDialogComponent implements OnInit {
 
   saveIllness() {
     this.dataService.saveIllness(this.addIllness.value.illnessName, this.addIllness.value.illnessDescription, this.addIllness.value.symptoms)
-      .subscribe((data) => {
-        console.log(data.toString());
-      });
+      .subscribe();
   }
 }

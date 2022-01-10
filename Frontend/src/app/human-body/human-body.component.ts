@@ -41,7 +41,7 @@ export class HumanBodyComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger;
     this.isAdmin = this.checkIfUserIsAdmin();
   }
   /**
