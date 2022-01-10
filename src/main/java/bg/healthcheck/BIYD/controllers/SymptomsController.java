@@ -7,6 +7,9 @@ import bg.healthcheck.BIYD.entities.Symptoms;
 import bg.healthcheck.BIYD.repositories.BodyPartsRepository;
 import bg.healthcheck.BIYD.repositories.SymptomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -53,5 +56,19 @@ public class SymptomsController {
     @GetMapping("/all")
     public List<Symptoms> getAllBodyParts() {
         return symptomsRepository.findAll();
+    }
+
+    @PostMapping("/addsymptom")
+    public ResponseEntity addSymptom(@RequestBody Symptoms symptom) {
+
+        if (symptom == null) {
+            return new ResponseEntity<>("Error: symptom is empty.", HttpStatus.BAD_REQUEST);
+        }
+        try {
+            symptomsRepository.save(symptom);
+        } catch (DataIntegrityViolationException | IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Symptom successfully added!", HttpStatus.OK);
     }
 }
