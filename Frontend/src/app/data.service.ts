@@ -39,4 +39,10 @@ export class DataService {
       name, body_part
     });
   }
+
+  saveIllness(name: string, description: string, symptoms: any) {
+    return this.http.post(this.APP_URL + '/app/illnesses/addIllness', {
+      name, description, symptoms
+    });
+  }
 }

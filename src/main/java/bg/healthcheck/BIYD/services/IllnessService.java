@@ -3,6 +3,9 @@ import bg.healthcheck.BIYD.entities.Illnesses;
 import bg.healthcheck.BIYD.entities.Symptoms;
 import bg.healthcheck.BIYD.repositories.IllnessesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -101,4 +104,12 @@ public class IllnessService {
         return matched;
     }
 
+    public Integer addIllness(Illnesses illness){
+        try {
+            illnessesRepository.save(illness);
+        } catch (DataIntegrityViolationException | IllegalArgumentException e) {
+            return 0;
+        }
+        return 1;
+    }
 }

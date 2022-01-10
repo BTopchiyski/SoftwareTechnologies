@@ -60,7 +60,6 @@ public class SymptomsController {
 
     @PostMapping("/addsymptom")
     public ResponseEntity addSymptom(@RequestBody Symptoms symptom) {
-
         if (symptom == null) {
             return new ResponseEntity<>("Error: symptom is empty.", HttpStatus.BAD_REQUEST);
         }

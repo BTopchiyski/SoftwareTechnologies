@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { DataService } from '../data.service';
 import { Symptom } from '../models/Symptom';
 
@@ -10,9 +10,16 @@ import { Symptom } from '../models/Symptom';
 })
 export class AddIllnessDialogComponent implements OnInit {
   symptomsList = [];
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private formBuilder: FormBuilder) { }
+  addIllness!: FormGroup;
 
   ngOnInit(): void {
+    this.addIllness = this.formBuilder.group({
+      illnessName: ['', Validators.required],
+      illnessDescription: ['', Validators.required],
+      symptoms: ['', Validators.required]
+    });
+
     this.dataService.getAllSymptoms().subscribe((res: any) => {
       this.symptomsList = res;
     }, error => {
@@ -21,4 +28,10 @@ export class AddIllnessDialogComponent implements OnInit {
   }
   symptoms = new FormControl();
 
+  saveIllness() {
+    this.dataService.saveIllness(this.addIllness.value.illnessName, this.addIllness.value.illnessDescription, this.addIllness.value.symptoms)
+      .subscribe((data) => {
+        console.log(data.toString());
+      });
+  }
 }
